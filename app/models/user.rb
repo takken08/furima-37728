@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :nickname,            presence: true
-
+  
   Valid_name_zenkaku = /\A[ぁ-んァ-ン一-龥]/
   Valid_name_kana = /\A[ァ-ヶー－]+\z/
   with_options presence: true do
