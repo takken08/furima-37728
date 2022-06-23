@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  Valid_password = /[a-z\d]{6,}/i
+  Valid_password = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i
   Valid_name_zenkaku = /\A[ぁ-んァ-ン一-龥]/
   Valid_name_kana = /\A[ァ-ヶー－]+\z/
 
