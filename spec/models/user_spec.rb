@@ -56,6 +56,21 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password Please enter in alphanumerical characters.")
       end
+      it '英字のみのpasswordでは登録できない' do
+        @user.password = "geabret"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password Please enter in alphanumerical characters.")
+      end
+      it '数字のみのpasswordでは登録できない' do
+        @user.password = "123456"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password Please enter in alphanumerical characters.")
+      end
+      it '全角文字を含むpasswordでは登録できない' do
+        @user.password = "t54245あ"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password Please enter in alphanumerical characters.")
+      end
       it 'last_nameが空だと登録できない' do
         @user.last_name = ""
         @user.valid?
