@@ -70,7 +70,22 @@ RSpec.describe Product, type: :model do
       it "selling_priceが半角数字で入力しないと出品できない" do
         @product.selling_price = "１２３４５"
         @product.valid?
-        expect(@product.errors.full_messages).to include("Selling price please enter the price from 300 yen to 9,999,999 yen")
+        expect(@product.errors.full_messages).to include("Selling price please enter the price from 300 yen to 9,999,999 yen in half-width digit")
+      end
+      it "selling_priceが300円未満では出品できない" do
+        @product.selling_price = 299
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Selling price please enter the price from 300 yen to 9,999,999 yen in half-width digit")
+      end
+      it "selling_priceが9,999,999円を超えると出品できない" do
+        @product.selling_price = 10000000
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Selling price please enter the price from 300 yen to 9,999,999 yen in half-width digit")
+      end
+      it "ユーザーが紐付いていなければ投稿できない" do
+        @product.user = nil
+        @product.valid?
+        expect(@product.errors.full_messages).to include("User must exist")
       end
     end
   end
