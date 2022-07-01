@@ -3,6 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  has_many :products
 
   Valid_password = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i
   Valid_name_zenkaku = /\A[ぁ-んァ-ン一-龥々ー]+\z/
