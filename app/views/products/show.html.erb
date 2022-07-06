@@ -8,11 +8,11 @@
     </h2>
     <div class="item-img-content">
       <%= image_tag @product.image ,class:"item-box-img" if @product.image.attached? %>
-      <%# if product.buy.present? %>
+      <%# 商品が売れている場合は、sold outを表示しましょう %>
       <div class="sold-out">
         <span>Sold Out!!</span>
       </div>
-      <%# end %>
+      <%#  %>
     </div>
     <div class="item-price-box">
       <span class="item-price">
@@ -36,7 +36,7 @@
     <% end %>
 
     <div class="item-explain-box">
-      <span><%= "商品説明" %></span>
+      <span><%= @product.explanation %></span>
     </div>
     <table class="detail-table">
       <tbody>
