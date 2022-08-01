@@ -12,4 +12,8 @@ class ShoppingAddress
     validates :product_id
   end
   validates :area, numericality: {other_than: 0, message: "can't be blank"}
+
+  def save
+    buy = Buy.create(product_id: product.id, user_id: user_id)
+    Address.create(post_code: post_code, area: area, municipality: municipality, house_number: house_number, phone_number: phone_number, buy_id: buy.id)
 end
