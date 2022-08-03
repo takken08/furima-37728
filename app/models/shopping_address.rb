@@ -16,4 +16,5 @@ class ShoppingAddress
   def save
     buy = Buy.create(product_id: product.id, user_id: user_id)
     Address.create(post_code: post_code, area_id: area_id, municipality: municipality, house_number: house_number, phone_number: phone_number, buy_id: buy.id)
+  end
 end
