@@ -7,13 +7,13 @@ class ShoppingAddress
     validates :municipality
     validates :house_number
     validates :phone_number, format: {with: /\A\d{10,11}\z/, greater_than_or_equal_to: 10, less_than_or_equal_to: 11, message: "Only half-width alphanumcric characters between 10 and 11 digits can be saved."}
-    validates :user_id
     validates :product_id
+    validates :user_id
   end
   validates :area_id, numericality: {other_than: 1, message: "can't be blank"}
 
   def save
-    buy = Buy.create(product_id: product.id, user_id: user_id)
+    buy = Buy.create(product_id: product_id, user_id: user_id)
     Address.create(post_code: post_code, area_id: area_id, municipality: municipality, house_number: house_number, phone_number: phone_number, buy_id: buy.id)
   end
 end
