@@ -9,6 +9,7 @@ class ShoppingAddress
     validates :phone_number, format: {with: /\A\d{10,11}\z/, greater_than_or_equal_to: 10, less_than_or_equal_to: 11, message: "is invalid. Only half-width alphanumcric characters between 10 and 11 digits can be saved."}
     validates :product_id
     validates :user_id
+    validates :token
   end
   validates :area_id, numericality: {other_than: 1, message: "can't be blank"}
 
