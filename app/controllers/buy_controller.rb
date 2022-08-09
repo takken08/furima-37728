@@ -1,6 +1,7 @@
 class BuyController < ApplicationController
   before_action :authenticate_user!
   before_action :set_params_id, only: [:index, :create]
+  before_action :move_to_root
 
   def index
     @shopping_address = ShoppingAddress.new
@@ -25,6 +26,13 @@ class BuyController < ApplicationController
 
   def set_params_id
     @product = Product.find(params[:product_id])
+  end
+
+  def move_to_root
+    set_params_id
+    if current_user.id == @product.user_id
+      redirect_to root_path
+    end
   end
 
   def pay_item
