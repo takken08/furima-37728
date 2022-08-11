@@ -60,6 +60,26 @@ RSpec.describe ShoppingAddress, type: :model do
         @shopping_address.valid?
         expect(@shopping_address.errors.full_messages).to include("Token can't be blank")
       end
+      it '電話番号が9桁以下では購入できない' do
+        @shopping_address.phone_number = "12345678"
+        @shopping_address.valid?
+        expect(@shopping_address.errors.full_messages).to include("Phone number is invalid. Only half-width alphanumcric characters between 10 and 11 digits can be saved.")
+      end
+      it '電話番号が12桁以上では購入できない' do
+        @shopping_address.phone_number = "090123456789"
+        @shopping_address.valid?
+        expect(@shopping_address.errors.full_messages).to include("Phone number is invalid. Only half-width alphanumcric characters between 10 and 11 digits can be saved.")
+      end
+      it 'userが紐付いていないと購入できない' do
+        @shopping_address.user_id = nil
+        @shopping_address.valid?
+        expect(@shopping_address.errors.full_messages).to include("User can't be blank")
+      end
+      it 'productが紐付いていないと購入できない' do
+        @shopping_address.product_id = nil
+        @shopping_address.valid?
+        expect(@shopping_address.errors.full_messages).to include("Product can't be blank")
+      end
     end
   end
 end
