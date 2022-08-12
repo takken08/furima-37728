@@ -6,7 +6,7 @@ class ShoppingAddress
     validates :post_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
     validates :municipality
     validates :house_number
-    validates :phone_number, format: {with: /\A\d{10,11}\z/,length: {minimum: 10, maximum: 11} , message: "is invalid. Only half-width alphanumcric characters between 10 and 11 digits can be saved."}
+    validates :phone_number, format: {with: /\A\d{10,11}\z/, message: "is invalid. Only half-width alphanumcric characters between 10 and 11 digits can be saved."}
     validates :product_id
     validates :user_id
     validates :token
