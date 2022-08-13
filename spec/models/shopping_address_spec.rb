@@ -30,6 +30,11 @@ RSpec.describe ShoppingAddress, type: :model do
         @shopping_address.valid?
         expect(@shopping_address.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
       end
+      it '郵便番号がハイフンなしの場合購入できない' do
+        @shopping_address.post_code = "1234567"
+        @shopping_address.valid?
+        expect(@shopping_address.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
+      end
       it '都道府県を選択していないと購入できない' do
         @shopping_address.area_id = 1
         @shopping_address.valid?
