@@ -30,11 +30,6 @@ RSpec.describe ShoppingAddress, type: :model do
         @shopping_address.valid?
         expect(@shopping_address.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
       end
-      it '郵便番号がハイフンなしの場合購入できない' do
-        @shopping_address.post_code = "1234567"
-        @shopping_address.valid?
-        expect(@shopping_address.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
-      end
       it '都道府県を選択していないと購入できない' do
         @shopping_address.area_id = 1
         @shopping_address.valid?
@@ -60,6 +55,11 @@ RSpec.describe ShoppingAddress, type: :model do
         @shopping_address.valid?
         expect(@shopping_address.errors.full_messages).to include("Phone number is invalid. Only half-width alphanumcric characters between 10 and 11 digits can be saved.")
       end
+      it 'tokenが空では購入できない' do
+        @shopping_address.token = nil
+        @shopping_address.valid?
+        expect(@shopping_address.errors.full_messages).to include("Token can't be blank")
+      end
       it '電話番号が9桁以下では購入できない' do
         @shopping_address.phone_number = "12345678"
         @shopping_address.valid?
@@ -69,11 +69,6 @@ RSpec.describe ShoppingAddress, type: :model do
         @shopping_address.phone_number = "090123456789"
         @shopping_address.valid?
         expect(@shopping_address.errors.full_messages).to include("Phone number is invalid. Only half-width alphanumcric characters between 10 and 11 digits can be saved.")
-      end
-      it 'tokenが空では購入できない' do
-        @shopping_address.token = nil
-        @shopping_address.valid?
-        expect(@shopping_address.errors.full_messages).to include("Token can't be blank")
       end
       it 'userが紐付いていないと購入できない' do
         @shopping_address.user_id = nil
